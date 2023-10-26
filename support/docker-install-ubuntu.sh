@@ -1,3 +1,4 @@
+#!/bin/bash
 # Please see: https://docs.docker.com/engine/install/ubuntu/
 
 # Add Docker's official GPG key:
@@ -13,3 +14,9 @@ echo \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
+
+# Install Docker
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Test Docker install
+sudo docker run hello-world
