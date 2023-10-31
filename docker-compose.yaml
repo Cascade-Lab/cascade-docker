@@ -1,5 +1,6 @@
 services:
   db:
+    restart: always
     image: postgres:15
     environment:
       POSTGRES_USER: cascade
@@ -12,6 +13,7 @@ services:
       - 5433:5432
 
   app:
+    restart: always
     image: cascadelab.azurecr.io/cascade:latest
     depends_on:
       - db
