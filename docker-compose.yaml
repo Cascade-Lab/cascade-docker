@@ -3,27 +3,35 @@ services:
     image: postgres:15
     environment:
       POSTGRES_USER: cascade
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-cascade}
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
       POSTGRES_DB: cascade
     volumes:
       - db-data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 5433:5432
+    secrets:
+      - db_password
 
   app:
-    image: cascadelab.azurecr.io/cascade:latest
+    image: cascadelab.azurecr.io/cascade:V3.7
     depends_on:
       - db
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cascade
       SPRING_DATASOURCE_USERNAME: cascade
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-cascade}
+      SPRING_DATASOURCE_PASSWORD_FILE: /run/secrets/db_password
       CUSTOM_CONTAINER_MODE_ENABLED: true
     volumes:
       - app-data:/app/storage
     ports:
       - 8080:8080
+    secrets:
+      - db_password
+
+secrets:
+   db_password:
+     file: ./db_password.txt
 
 volumes:
   db-data:
