@@ -1,5 +1,6 @@
 services:
   db:
+    restart: always
     image: postgres:15
     environment:
       POSTGRES_USER: cascade
@@ -14,6 +15,7 @@ services:
       - db_password
 
   app:
+    restart: always
     image: cascadelab.azurecr.io/cascade/prod:V3.7.0
     depends_on:
       - db
