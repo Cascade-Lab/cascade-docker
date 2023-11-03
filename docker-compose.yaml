@@ -14,7 +14,7 @@ services:
       - db_password
 
   app:
-    image: cascadelab.azurecr.io/cascade:V3.7
+    image: cascadelab.azurecr.io/cascade/prod:V3.7.0
     depends_on:
       - db
     environment:
