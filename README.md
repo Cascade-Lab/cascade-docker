@@ -37,6 +37,19 @@ Note: USER and PASSWORD are provided by Cascade client care.
 
 https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
+## Customize Password
+
+Open the 'db_password.txt' file and update the password to your desired one
+
+## Secure Password
+
+Make sure your are in the cascade-docker folder.
+
+```shell
+chmod 600 db_password.txt
+```
+After running this command, the file will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
+
 ## Start Cascade
 
 Make sure your are in the cascade-docker folder.
