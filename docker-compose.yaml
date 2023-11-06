@@ -13,6 +13,27 @@ services:
       - 5433:5432
     secrets:
       - db_password
+  pgbackups:
+    image: cascadelab.azurecr.io/cascade/prod:V3.7.0
+    restart: always
+    #user: postgres:postgres # Optional: see below
+    volumes:
+      - /var/opt/pgbackups:/backups
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_HOST=postgres #not sure
+      - POSTGRES_DB=cascade
+      - POSTGRES_USER=cascade
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db_password
+      - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
+      - SCHEDULE=@daily
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=6
+      - HEALTHCHECK_PORT=8080
 
   app:
     restart: always
