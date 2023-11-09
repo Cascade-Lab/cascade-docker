@@ -23,7 +23,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cascade
       SPRING_DATASOURCE_USERNAME: cascade
       SPRING_DATASOURCE_PASSWORD_FILE: /run/secrets/db_password
-      CUSTOM_CONTAINER_MODE_ENABLED: true
     volumes:
       - app-data:/app/storage
     ports:
