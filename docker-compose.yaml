@@ -16,7 +16,7 @@ services:
 
   app:
     restart: always
-    image: cascadelab.azurecr.io/cascade/prod:V3.7.0
+    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v3.7
     depends_on:
       - db
     environment:
