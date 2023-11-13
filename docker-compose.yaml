@@ -25,16 +25,16 @@ services:
     depends_on:
       - db
     environment:
-      - POSTGRES_HOST=db
-      - POSTGRES_DB=cascade
-      - POSTGRES_USER=cascade
-      - POSTGRES_PASSWORD=cascade
-      - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
-      - SCHEDULE=@every 1m1s #@daily
-      - BACKUP_KEEP_DAYS=7
-      - BACKUP_KEEP_WEEKS=4
-      - BACKUP_KEEP_MONTHS=6
-      - HEALTHCHECK_PORT=8080
+      POSTGRES_HOST: db
+      POSTGRES_DB: cascade
+      POSTGRES_USER: cascade
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      POSTGRES_EXTRA_OPTS: -Z6 --schema=public --blobs
+      SCHEDULE: "@every 1m1s" #@daily
+      BACKUP_KEEP_DAYS: 7
+      BACKUP_KEEP_WEEKS: 4
+      BACKUP_KEEP_MONTHS: 6
+      HEALTHCHECK_PORT: 8080
     secrets:
       - db_password
 
@@ -47,7 +47,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cascade
       SPRING_DATASOURCE_USERNAME: cascade
       SPRING_DATASOURCE_PASSWORD_FILE: /run/secrets/db_password
-      CUSTOM_CONTAINER_MODE_ENABLED: true
+      CUSTOM_CONTAINER_MODE_ENABLED: true # to delete once merge request
     volumes:
       - app-data:/app/storage
     ports:
