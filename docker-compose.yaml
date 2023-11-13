@@ -9,35 +9,38 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgbackups:/backups
     ports:
       - 5433:5432
     secrets:
       - db_password
+
   pgbackups:
-    image: cascadelab.azurecr.io/cascade/prod:V3.7.0
+    image: prodrigestivill/postgres-backup-local
     restart: always
-    #user: postgres:postgres # Optional: see below
     volumes:
-      - /var/opt/pgbackups:/backups
+      - pgbackups:/backups
     links:
-      - postgres
+      - db
     depends_on:
-      - postgres
+      - db
     environment:
-      - POSTGRES_HOST=postgres #not sure
+      - POSTGRES_HOST=db
       - POSTGRES_DB=cascade
       - POSTGRES_USER=cascade
-      - POSTGRES_PASSWORD_FILE=/run/secrets/db_password
+      - POSTGRES_PASSWORD=cascade
       - POSTGRES_EXTRA_OPTS=-Z6 --schema=public --blobs
-      - SCHEDULE=@daily
+      - SCHEDULE=@every 1m1s #@daily
       - BACKUP_KEEP_DAYS=7
       - BACKUP_KEEP_WEEKS=4
       - BACKUP_KEEP_MONTHS=6
       - HEALTHCHECK_PORT=8080
+    secrets:
+      - db_password
 
   app:
     restart: always
-    image: cascadelab.azurecr.io/cascade/prod:V3.7.0
+    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v3.7
     depends_on:
       - db
     environment:
@@ -59,3 +62,4 @@ secrets:
 volumes:
   db-data:
   app-data:
+  pgbackups:
