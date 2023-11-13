@@ -108,6 +108,12 @@ For cleaning, the script removes the files for each category only if the new bac
 
 ## Restore your Backup
 
+be sure that your containers are running
+```
+docker container ls
+```
+(Normally there are 3 containers running: pgbackups, app and db)
+
 
 # TO DO
 
