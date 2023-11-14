@@ -150,7 +150,7 @@ docker volume rm cascade-docker_db-data
 ### Step 7: Start Database Service
 Restart the database service only:
 ```shell
-docker-compose up -d db
+docker compose up -d db
 ```
 
 ### Step 8: Restore Backup
