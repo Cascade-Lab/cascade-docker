@@ -63,3 +63,7 @@ volumes:
   db-data:
   app-data:
   pgbackups:
+    driver_opts:
+      type: none
+      o: bind
+      device: /etc/backups
