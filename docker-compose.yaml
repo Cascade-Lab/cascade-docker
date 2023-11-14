@@ -30,7 +30,7 @@ services:
       POSTGRES_USER: cascade
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
       POSTGRES_EXTRA_OPTS: -Z6 --schema=public --blobs
-      SCHEDULE: "@every 1m1s" #@daily
+      SCHEDULE: "@every 1m1s" #@daily to change once merge request
       BACKUP_KEEP_DAYS: 7
       BACKUP_KEEP_WEEKS: 4
       BACKUP_KEEP_MONTHS: 6
@@ -63,7 +63,7 @@ volumes:
   db-data:
   app-data:
   pgbackups:
-    driver_opts:
-      type: none
-      o: bind
-      device: /etc/backups
+    driver_opts: #to remove for windows
+      type: none #to remove for windows
+      o: bind #to remove for windows
+      device: /etc/backups #to remove for windows
