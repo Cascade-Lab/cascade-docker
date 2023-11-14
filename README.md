@@ -108,55 +108,60 @@ For cleaning, the script removes the files for each category only if the new bac
 
 ## Restore your Backup
 
-Step 1: Be sure that your containers are running
-```
+### Step 1: Check Running Containers
+Ensure the necessary containers are running:
+```shell
 docker ps
 ```
-(Normally there are those 3 containers running: cascade-docker-pgbackups-1, cascade-docker-app-1 and cascade-docker-db-1)
+Expected running containers: cascade-docker-pgbackups-1, cascade-docker-app-1, and cascade-docker-db-1.
 
-Step 2: Access the Container's Shell
-```
-docker exec -it <container_id_or_name> /bin/bash
+### Step 2: Access Container's Shell
+Access the shell of the required container:
+```shell
+docker exec -it cascade-docker-pgbackups-1 /bin/bash
 ```
 
-Step 3: View Files
-```
+### Step 3: View Available Backups
+Check available backups in the specified directory (monthly, weekly, daily, or last):
+```shell
 ls backups/<directory>
 ```
-You can choose between monthly, weekly, daily or last directory depending of your needs
-it will display the backups that you have, for example:
-![image](https://github.com/Cascade-Lab/cascade-docker/assets/146708464/69424b89-762c-4851-b588-f86b8fa58277)
+Select the desired backup for restoration and save the backup name, you will need it in further steps.
 
-save the backup name that you need to restore
-
-Step 4: Exit the Container
-```
+### Step 4: Exit Container
+Exit the container's shell:
+```shell
 exit
 ```
 
-Step 5: Stop containers
-```
+### Step 5: Stop Containers
+Stop relevant containers:
+```shell
 docker stop cascade-docker-pgbackups-1 cascade-docker-app-1 cascade-docker-db-1
 ```
 
-Step 6: Delete cascade-db container and cascade-db volume
-```
+### Step 6: Remove Container and Volume
+Remove the database container and associated volume:
+```shell
 docker rm cascade-docker-db-1
 docker volume rm cascade-docker_db-data
 ```
 
-Step 7: Start database service only
-```
+### Step 7: Start Database Service
+Restart the database service only:
+```shell
 docker-compose up -d db
 ```
 
-Step 8: restore the backup inside the new database
-```
+### Step 8: Restore Backup
+Restore the chosen backup into the new database:
+```shell
 docker exec --tty --interactive cascade-docker-db-1 /bin/sh -c "zcat /backups/last/<your backup name> | psql --username=cascade --dbname=cascade -W"
 ```
-Then enter the Database password (can be find in db_password.txt file)
+Enter the database password, can be found in db_password.txt file.
 
-Step 9: Restart the application and the backup
-```
+### Step 9: Restart Application and Backup
+Restart the application and backup services:
+```shell
 docker compose up -d
 ```
