@@ -1,4 +1,4 @@
-# Running Cascade with Docker
+# Running Cascade with Docker on Linux
 
 ## Download the Cascade Docker toolkit
 
@@ -43,12 +43,19 @@ Open the 'db_password.txt' file and update the password to your desired one
 
 ## Secure Password
 
-Make sure your are in the cascade-docker folder.
+Make sure you are in the cascade-docker folder.
 
 ```shell
 chmod 600 db_password.txt
 ```
 After running this command, the file will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
+
+## Set Backup Folder
+
+```shell
+sudo mkdir -m 600 -p /etc/backups
+```
+After running this command, the backup folder will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
 
 ## Start Cascade
 
@@ -118,7 +125,7 @@ Expected running containers: cascade-docker-pgbackups-1, cascade-docker-app-1, a
 ### Step 2: View Available Backups
 Check available backups in the specified directory (monthly, weekly, daily, or last):
 ```shell
-docker exec -it cascade-docker-pgbackups-1 /bin/bash -c "ls backups/<directory>"
+ls /etc/backups/<directory>
 ```
 Select the desired backup for restoration and save the backup name, you will need it in further steps.
 
@@ -153,3 +160,5 @@ Restart the application and backup services:
 ```shell
 docker compose up -d
 ```
+
+
