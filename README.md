@@ -108,31 +108,55 @@ For cleaning, the script removes the files for each category only if the new bac
 
 ## Restore your Backup
 
-be sure that your containers are running
+Step 1: Be sure that your containers are running
 ```
-docker container ls
+docker ps
 ```
-(Normally there are 3 containers running: pgbackups, app and db)
+(Normally there are those 3 containers running: cascade-docker-pgbackups-1, cascade-docker-app-1 and cascade-docker-db-1)
 
+Step 2: Access the Container's Shell
+```
+docker exec -it <container_id_or_name> /bin/bash
+```
 
-# TO DO
+Step 3: View Files
+```
+ls backups/<directory>
+```
+You can choose between monthly, weekly, daily or last directory depending of your needs
+it will display the backups that you have, for example:
+![image](https://github.com/Cascade-Lab/cascade-docker/assets/146708464/69424b89-762c-4851-b588-f86b8fa58277)
 
-Go to your container 
-And find the backup that you need 
-eg:
-/backups/last/cascade-20231113-151641.sql.gz
+save the backup name that you need to restore
 
-Stop containers
-	Ø docker stop $(docker ps -q)  
+Step 4: Exit the Container
+```
+exit
+```
 
-Delete db container and db-data volume
+Step 5: Stop containers
+```
+docker stop cascade-docker-pgbackups-1 cascade-docker-app-1 cascade-docker-db-1
+```
 
-demarrer uniquement db
-	Ø docker-compose restart db
+Step 6: Delete cascade-db container and cascade-db volume
+```
+docker rm cascade-docker-db-1
+docker volume rm cascade-docker_db-data
+```
 
-restore du backup
-	Ø docker exec --tty --interactive cascade-docker-db-1 /bin/sh -c "zcat /backups/last/cascade-20231113-151641.sql.gz | psql --username=cascade --dbname=cascade -W"
+Step 7: Start database service only
+```
+docker-compose up -d db
+```
 
-Relancer l'app et le back up
-	Ø docker compose up
-![image](https://github.com/Cascade-Lab/cascade-docker/assets/146708464/97d9a667-6d11-4240-b642-4319e8f224e2)
+Step 8: restore the backup inside the new database
+```
+docker exec --tty --interactive cascade-docker-db-1 /bin/sh -c "zcat /backups/last/<your backup name> | psql --username=cascade --dbname=cascade -W"
+```
+Then enter the Database password (can be find in db_password.txt file)
+
+Step 9: Restart the application and the backup
+```
+docker compose up -d
+```
