@@ -163,15 +163,6 @@ docker compose up -d
 
 # Running Cascade with Docker on Windows
 
-## Secure Password 
-
-Make sure you are in the cascade-docker folder.
-
-```shell
-chmod 600 db_password.txt
-```
-After running this command, the file will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
-
 ## Remove from docker-compose.yaml
 ```yaml
     driver_opts:
@@ -180,7 +171,17 @@ After running this command, the file will have permissions set to 600, granting 
       device: /etc/backups
 ```
       
-## Set Backup Folder
+## Secure Password ----------------------to be fixed
+
+Make sure you are in the cascade-docker folder.
+
+```shell
+chmod 600 db_password.txt
+```
+After running this command, the file will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
+
+
+## Set Backup Folder----------------------to be fixed
 
 ```shell
 sudo mkdir -m 600 -p /etc/backups
@@ -189,7 +190,7 @@ After running this command, the backup folder will have permissions set to 600, 
 
 
 ### Step 2: View Available Backups
- 
+Use this command line not the other one
 ```shell
 docker exec -it cascade-docker-pgbackups-1 /bin/bash -c "ls backups/<directory>"
 ```
