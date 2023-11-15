@@ -50,6 +50,19 @@ chmod 600 db_password.txt
 After running this command, the file will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
 
 ### Set Backup Folder
+#### Using your Backup Path
+It is possible to change the backup directory by changing the path of this line in the docker-compose.yaml:
+```yaml
+      device: /etc/backups      # replace /etc/backups by <NEW PATH>
+```
+
+Then run the following command in the terminal: 
+```shell
+sudo mkdir -m 600 -p <NEW PATH>
+```
+After running this command, the backup folder will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
+
+#### Using Default Backup Path
 
 ```shell
 sudo mkdir -m 600 -p /etc/backups
@@ -248,7 +261,13 @@ sudo docker compose stop
 
 
 
-
+# Saving Backup on Windows 
+If you prefer to save the database backup locally instead of on the volume "cascade-docker-pgbackups-1", 
+you'll need to create a recurring task that executes the following command with administrator privilege:
+```shell
+docker cp cascade-docker-pgbackups-1:/backups <YOUR PATH>
+```
+It will copy from the container's file system to the local machine
 
 # Restore your Backup on Windows
 
