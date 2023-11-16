@@ -21,9 +21,8 @@ Courtesy scripts for Ubuntu and Debian are provided in the support folder. Pleas
 https://docs.docker.com/engine/install/
 
 ```shell
-cd support/
-chmod +x docker-install-ubuntu.sh
-./docker-install-ubuntu.sh
+chmod +x support/docker-install-ubuntu.sh
+./support/docker-install-ubuntu.sh
 ```
 
 ### Log in to Cascade Container Registry
@@ -50,24 +49,31 @@ chmod 600 db_password.txt
 After running this command, the file will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
 
 ### Set Backup Folder
-#### Using your Backup Path
-It is possible to change the backup directory by changing the path of this line in the docker-compose.yaml:
-```yaml
-      device: /etc/backups      # replace /etc/backups by <NEW PATH>
-```
+#### Using a Personalized Backup Path
+If you want to change the location where your backups are stored, follow these steps:
 
-Then run the following command in the terminal: 
+##### Update Docker Compose Configuration:
+In the docker-compose.yaml file, locate the line that specifies the backup directory:
+
+```yaml
+      device: /etc/backups
+```
+Replace /etc/backups with the new path you prefer for storing backups.
+
+##### Create the New Backup Directory:
+Run this command in your terminal, replacing <NEW PATH> with the path you specified:
 ```shell
 sudo mkdir -m 600 -p <NEW PATH>
 ```
-After running this command, the backup folder will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
+This command creates the new directory with permissions set to 600, ensuring that only the file owner has read and write access while denying access to other users.
 
 #### Using Default Backup Path
+If you prefer to stick with the default backup path (/etc/backups), use the following command:
 
 ```shell
 sudo mkdir -m 600 -p /etc/backups
 ```
-After running this command, the backup folder will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
+This command creates the default backup folder with permissions set to 600, similarly allowing read and write access only to the file owner while denying access to other users.
 
 ### Start Cascade
 
@@ -146,7 +152,11 @@ Expected running containers: cascade-docker-pgbackups-1, cascade-docker-app-1, a
 
 Check available backups in the specified directory (monthly, weekly, daily, or last):
 ```shell
-ls /etc/backups/<directory>
+sudo ls <BACKUPS PATH>/<DIRECTORY>
+```
+For example:
+```shell
+sudo ls /etc/backups/last
 ```
 Select the desired backup for restoration and save the backup name, you will need it in further steps.
 
