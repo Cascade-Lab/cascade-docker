@@ -174,7 +174,7 @@ docker stop cascade-docker-pgbackups-1 cascade-docker-app-1 cascade-docker-db-1
 
 Remove the database container and associated volume:
 ```shell
-docker rm cascade-docker-db-1
+docker rm cascade-docker-db-1 cascade-docker-pgbackups-1
 docker volume rm cascade-docker_db-data
 ```
 
@@ -311,7 +311,7 @@ docker stop cascade-docker-pgbackups-1 cascade-docker-app-1 cascade-docker-db-1
 
 Remove the database container and associated volume:
 ```shell
-docker rm cascade-docker-db-1
+docker rm cascade-docker-db-1 cascade-docker-pgbackups-1
 docker volume rm cascade-docker_db-data
 ```
 
