@@ -20,6 +20,7 @@ services:
     restart: always
     volumes:
       - pgbackups:/backups
+      - db-data:/var/lib/postgresql/data
     links:
       - db
     depends_on:
@@ -63,7 +64,7 @@ volumes:
   db-data:
   app-data:
   pgbackups:
-    driver_opts: #to remove for windows
-      type: none #to remove for windows
-      o: bind #to remove for windows
-      device: /etc/backups #to remove for windows
+    driver_opts:
+      type: none
+      o: bind
+      device: /etc/backups
