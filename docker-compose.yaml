@@ -21,8 +21,6 @@ services:
     volumes:
       - pgbackups:/backups
       - db-data:/var/lib/postgresql/data
-    links:
-      - db
     depends_on:
       - db
     environment:
