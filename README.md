@@ -33,8 +33,6 @@ docker login -u USER -p PASSWORD cascadelab.azurecr.io
 
 Note: USER and PASSWORD are provided by Cascade client care.
 
-https://docs.docker.com/engine/reference/commandline/login/#credentials-store
-
 ### Customize Password
 
 Open the 'db_password.txt' file and update the password to your desired one
@@ -236,53 +234,43 @@ docker login -u USER -p PASSWORD cascadelab.azurecr.io
 
 Note: USER and PASSWORD are provided by Cascade client care.
 
-https://docs.docker.com/engine/reference/commandline/login/#credentials-store
-
 ### Customize Password
 
 Open the 'db_password.txt' file and update the password to your desired one
 
 ### Secure Password
-
-Make sure you are in the cascade-docker folder.
-
+Secure the db-password.txt file:
 ```shell
-icacls "db_password.txt" /inheritance:r /grant:r "%username%:F"
+icacls db_password.txt /inheritance:r /grant:r "<USER>:F"
 ```
-After running this command, the file will have permissions set, granting read and write access only to the file owner while denying access to other users.
-
-### Set Backup Folder
-
-```shell
-docker exec -it cascade-docker-pgbackups-1 /bin/bash -c "sudo mkdir -m 600 -p backups"
-```
-After running this command, the backup folder will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
+Replace USER by the user you want to have acess to your database password
 
 ### Start Cascade
 
 Make sure your are in the cascade-docker folder.
 
 ```shell
-sudo docker compose up
+docker compose up -d
 ```
+
+### Secure Backup Folder
+
+```shell
+docker exec -it cascade-docker-pgbackups-1 /bin/bash -c "chmod 600 /backups"
+```
+After running this command, the backup folder will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
 
 ### Stop Cascade
 
 ```shell
-sudo docker compose stop
+docker compose stop
 ```
 
 
 
-# Saving Backup on Windows 
-If you prefer to save the database backup locally instead of on the volume "cascade-docker-pgbackups-1", 
-you'll need to create a recurring task that executes the following command with administrator privilege:
-```shell
-docker cp cascade-docker-pgbackups-1:/backups <YOUR PATH>
-```
-It will copy from the container's file system to the local machine
 
-# Restore your Backup on Windows
+
+# Restore your volume Backup on Windows
 
 ### Step 1: Check Running Containers
 
@@ -336,3 +324,25 @@ Restart the application and backup services:
 ```shell
 docker compose up -d
 ```
+
+
+
+
+
+# Saving Locally Backup on Windows 
+For saving a database backup locally instead of the "cascade-docker-pgbackups-1" volume, create a recurring task with **administrative privileges** to execute the command:
+
+```shell
+docker cp cascade-docker-pgbackups-1:/backups <YOUR PATH>
+```
+This command copies data from the container's file system to your specified local path.
+
+# Restore your local Backup on Windows
+For restoring a backup saved locally, use the following command with **administrative privileges**:
+```shell
+docker cp <Path to your local backup file> cascade-docker-pgbackups-1:/backups/last
+```
+This command copies data from your local machine to the container's file system within the "/backups/last" folder.
+
+Follow the "Restore your Backup on Windows" process, skipping step 2 as instructed.
+
