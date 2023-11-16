@@ -329,7 +329,7 @@ docker compose up -d
 
 
 
-# Saving Locally Backup on Windows 
+# Saving Locally your Backup on Windows 
 For saving a database backup locally instead of the "cascade-docker-pgbackups-1" volume, create a recurring task with **administrative privileges** to execute the command:
 
 ```shell
