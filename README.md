@@ -49,25 +49,27 @@ chmod 600 db_password.txt
 After running this command, the file will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
 
 ### Set Backup Folder
-#### Using a Personalized Backup Path
+In order to configure the backup directory, you have two options:
+
+#### [Option 1] Using a Personalized Backup Path
 If you want to change the location where your backups are stored, follow these steps:
 
 ##### Update Docker Compose Configuration:
-In the docker-compose.yaml file, locate the line that specifies the backup directory:
+In the docker-compose.yaml file, locate the line that specifies the backup directory path on your device:
 
 ```yaml
       device: /etc/backups
 ```
-Replace /etc/backups with the new path you prefer for storing backups.
+Replace /etc/backups with a new path you decided for storing backups.
 
 ##### Create the New Backup Directory:
-Run this command in your terminal, replacing <NEW PATH> with the path you specified:
+Run this command in your terminal, replacing <NEW BACKUPS PATH> with the path you specified:
 ```shell
-sudo mkdir -m 600 -p <NEW PATH>
+sudo mkdir -m 600 -p <NEW BACKUPS PATH>
 ```
 This command creates the new directory with permissions set to 600, ensuring that only the file owner has read and write access while denying access to other users.
 
-#### Using Default Backup Path
+#### [Option 2] Using Default Backup Path
 If you prefer to stick with the default backup path (/etc/backups), use the following command:
 
 ```shell
@@ -154,6 +156,7 @@ Check available backups in the specified directory (monthly, weekly, daily, or l
 ```shell
 sudo ls <BACKUPS PATH>/<DIRECTORY>
 ```
+BACKUPS PATH is as default  "/etc/backups" but if did [option 1] during the set up, you will need to set it to the new path you decided for storing backups 
 For example:
 ```shell
 sudo ls /etc/backups/last
