@@ -39,5 +39,9 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /etc/backups
+      device: /cascade-docker/data/db
   app-data:
+    driver_opts:
+      type: none
+      o: bind
+      device: /cascade-docker/data/documents
