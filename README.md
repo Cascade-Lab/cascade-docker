@@ -26,7 +26,7 @@ chmod +x support/docker-install-ubuntu.sh
 ./support/docker-install-ubuntu.sh
 ```
 
-## Log in to Cascade Container Registry
+## Log into the Cascade Container Registry.
 
 ```shell
 docker login -u USER -p PASSWORD cascadelab.azurecr.io
