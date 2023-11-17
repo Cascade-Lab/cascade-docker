@@ -102,3 +102,9 @@ docker compose up
 ```shell
 docker compose down
 ```
+
+## Backup Cascade
+
+The **data** folder is what you need to backup
+
+it is located in cascade-docker directory
