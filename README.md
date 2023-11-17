@@ -71,7 +71,7 @@ The output will display the path to your home directory, which typically corresp
 
 
 Step 3: Update Docker Compose Configuration
-In your docker-compose.yaml file, update the volume paths by replacing <USER> with your actual username:
+In your **docker-compose.yaml** file, update the volume paths by replacing USER with your actual username:
 
 ```docker-compose.yaml
 volumes:
@@ -87,7 +87,7 @@ volumes:
       device: /home/<USER>/cascade-docker/data/documents
 ```
 
-Ensure that /home/<USER>/cascade-docker reflects the correct path to your cascade-docker directory.
+Ensure that /home/USER/cascade-docker reflects the correct path to your cascade-docker directory.
 
 ## Start Cascade
 
