@@ -39,9 +39,9 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /cascade-docker/data/db
+      device: /home/azureuser/cascade-docker/data/db
   app-data:
     driver_opts:
       type: none
       o: bind
-      device: /cascade-docker/data/documents
+      device: /home/azureuser/cascade-docker/data/documents
