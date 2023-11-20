@@ -36,4 +36,12 @@ secrets:
 
 volumes:
   db-data:
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/<USER>/cascade-docker/data/db
   app-data:
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/<USER>/cascade-docker/data/documents

@@ -22,12 +22,11 @@ https://docs.docker.com/engine/install/
 
 
 ```shell
-cd support/
-chmod +x docker-install-ubuntu.sh
-./docker-install-ubuntu.sh
+chmod +x support/docker-install-ubuntu.sh
+./support/docker-install-ubuntu.sh
 ```
 
-## Log in to Cascade Container Registry
+## Log into the Cascade Container Registry.
 
 ```shell
 docker login -u USER -p PASSWORD cascadelab.azurecr.io
@@ -50,16 +49,62 @@ chmod 600 db_password.txt
 ```
 After running this command, the file will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
 
+## Creating Database and Attachment Folders
+
+Step 1: Create Necessary Folders
+Ensure you are within the cascade-docker folder and execute the following command in your terminal:
+
+```shell
+mkdir -p data/db data/documents
+```
+After running this command:
+
+The data/db and data/documents directories will be created within your cascade-docker folder.
+
+Step 2: Find Your Username
+Retrieve your username by running the following command in the terminal:
+
+```shell
+echo $HOME
+```
+The output will display the path to your home directory, which typically corresponds to your username.
+
+
+Step 3: Update Docker Compose Configuration
+In your **docker-compose.yaml** file, update the volume paths by replacing USER with your actual username:
+
+```docker-compose.yaml
+volumes:
+  db-data:
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/<USER>/cascade-docker/data/db
+  app-data:
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/<USER>/cascade-docker/data/documents
+```
+
+Ensure that /home/USER/cascade-docker reflects the correct path to your cascade-docker directory.
+
 ## Start Cascade
 
 Make sure your are in the cascade-docker folder.
 
 ```shell
-sudo docker compose up
+docker compose up
 ```
 
 ## Stop Cascade
 
 ```shell
-sudo docker compose down
+docker compose down
 ```
+
+## Backup Cascade
+
+The **data** folder is what you need to backup
+
+it is located in cascade-docker directory
