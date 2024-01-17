@@ -3,14 +3,14 @@ services:
     restart: always
     image: postgres:15
     environment:
-      POSTGRES_USER: cascade
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
-      POSTGRES_DB: cascade
+      POSTGRES_DB: postgres
     volumes:
       - db-data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - 5433:5432
+      - 5432:5432
     secrets:
       - db_password
 
