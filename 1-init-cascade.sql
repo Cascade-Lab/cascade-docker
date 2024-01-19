@@ -1,0 +1,8 @@
+CREATE DATABASE cascade WITH OWNER = cascade ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+
+\c cascade;
+GRANT ALL ON SCHEMA public TO cascade;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "unaccent";
