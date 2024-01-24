@@ -17,7 +17,7 @@ services:
 
   app:
     restart: always
-    image: testvarcontainer
+    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v4.2.1
     depends_on:
       - db
     environment:
