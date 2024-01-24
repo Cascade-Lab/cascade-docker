@@ -42,7 +42,7 @@ Open the 'db_password.txt' file and update the password to your desired one
 
 ## Secure Password
 
-Make sure your are in the cascade-docker folder.
+Make sure you are in the cascade-docker folder.
 
 ```shell
 chmod 600 db_password.txt
@@ -91,7 +91,7 @@ Ensure that /home/USER/cascade-docker reflects the correct path to your cascade-
 
 ## Start Cascade
 
-Make sure your are in the cascade-docker folder.
+Make sure you are in the cascade-docker folder.
 
 ```shell
 docker compose up
