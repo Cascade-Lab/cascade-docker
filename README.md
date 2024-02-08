@@ -97,6 +97,14 @@ Make sure you are in the cascade-docker folder.
 docker compose up
 ```
 
+## Opening external access
+
+The application can be connected to two domains and their subdomains, which should be available 
+from your infrastructure in case of usage:
+* neterium.cloud (Name screening API - Neterium)
+* sentry.io (Error tracking - Sentry. Optional)
+
+
 ## Stop Cascade
 
 ```shell
