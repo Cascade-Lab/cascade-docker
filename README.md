@@ -1,3 +1,5 @@
+![image](https://github.com/Cascade-Lab/cascade-docker/assets/146708464/2042042f-33c5-4d11-a76f-7e2734258c31)
+
 # Running Cascade with Docker
 
 ## Download the Cascade Docker toolkit
