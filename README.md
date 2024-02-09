@@ -1,21 +1,4 @@
-```mermaid
-graph TD
-  subgraph Docker Host
-    subgraph App Container
-      app((App Container))
-    end
-    subgraph DB Container
-      db((DB Container))
-    end
-  end
-
-  subgraph External Network
-    client(Client Browser)
-  end
-
-  client -->|HTTP 8080| app
-  app -->|PostgreSQL 5432| db
-```
+![image](https://github.com/Cascade-Lab/cascade-docker/assets/146708464/2042042f-33c5-4d11-a76f-7e2734258c31)
 
 # Running Cascade with Docker
 
