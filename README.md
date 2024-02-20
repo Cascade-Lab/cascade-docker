@@ -1,4 +1,4 @@
-![image](https://github.com/Cascade-Lab/cascade-docker/assets/146708464/2042042f-33c5-4d11-a76f-7e2734258c31)
+![image](https://github.com/Cascade-Lab/cascade-docker/assets/146708464/82930c60-b645-427b-b7ae-821d88adbd66)
 
 # Running Cascade with Docker
 
@@ -53,27 +53,22 @@ After running this command, the file will have permissions set to 600, granting 
 
 ## Creating Database and Attachment Folders
 
-Step 1: Create Necessary Folders
-Ensure you are within the cascade-docker folder and execute the following command in your terminal:
+Step 1: Create Necessary Folders for the data at your desired location 
+
+Go to the desired location and execute the following command in your terminal: 
 
 ```shell
 mkdir -p data/db data/documents
 ```
-After running this command:
+After running this command: 
 
-The data/db and data/documents directories will be created within your cascade-docker folder.
+The data/db and data/documents directories will be created within your desired location. 
 
-Step 2: Find Your Username
-Retrieve your username by running the following command in the terminal:
+ 
 
-```shell
-echo $HOME
-```
-The output will display the path to your home directory, which typically corresponds to your username.
+Step 2: Update Docker Compose Configuration 
 
-
-Step 3: Update Docker Compose Configuration
-In your **docker-compose.yaml** file, update the volume paths by replacing USER with your actual username:
+In your “docker-compose.yaml” file, update the volume paths with the path where you created data/db and data/documents directories: 
 
 ```docker-compose.yaml
 volumes:
@@ -89,8 +84,6 @@ volumes:
       device: /home/<USER>/cascade-docker/data/documents
 ```
 
-Ensure that /home/USER/cascade-docker reflects the correct path to your cascade-docker directory.
-
 ## Start Cascade
 
 Make sure you are in the cascade-docker folder.
@@ -98,6 +91,23 @@ Make sure you are in the cascade-docker folder.
 ```shell
 docker compose up
 ```
+Wait 1-2 minutes then go to http://localhost:8080/ , this screen should appear: 
+
+![image](https://github.com/Cascade-Lab/cascade-docker/assets/146708464/71e9fd9a-045a-451e-b1b7-d758899e77f6)
+
+Then, enter and activate the license. 
+
+Note: License is provided by Cascade client care. 
+ 
+Once License has been activated, a login screen like this should display: 
+
+![image](https://github.com/Cascade-Lab/cascade-docker/assets/146708464/737a42ae-6e42-46e0-b066-8ba95464deff)
+
+You will have to connect with the following credentials: 
+
+Username: admin@example.com 
+
+Password: secret 
 
 ## Opening external access
 
@@ -106,10 +116,19 @@ from your infrastructure in case of usage:
 * neterium.cloud (Name screening API - Neterium)
 * sentry.io (Error tracking - Sentry. Optional)
 
+To be sure that the application can connect, go to Health Dashboard: 
+
+![image](https://github.com/Cascade-Lab/cascade-docker/assets/146708464/aa942dee-a518-4868-92c4-5eeb433ca121)
+
+And check if the Screening API field is working: 
+
+![image](https://github.com/Cascade-Lab/cascade-docker/assets/146708464/6e9018c2-3870-4ce8-8959-976237288aa8)
+
 
 ## Stop Cascade
-
-```shell
+ 
+It is possible to stop Cascade, first make sure you are in the cascade-docker folder, then execute the following command line. 
+```
 docker compose down
 ```
 
