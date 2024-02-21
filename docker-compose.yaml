@@ -1,4 +1,4 @@
-version: '3.8'
+version: '4.3'
 
 services:
   db:
@@ -18,7 +18,7 @@ services:
 
   app:
     restart: always
-    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v4.2.1
+    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v4.3.0
     depends_on:
       - db
     environment:
