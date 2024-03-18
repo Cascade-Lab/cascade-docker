@@ -16,10 +16,3 @@ psql -v ON_ERROR_STOP=1 --username "postgres" --dbname "cascade" <<-EOSQL
     CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
     CREATE EXTENSION IF NOT EXISTS "unaccent";
 EOSQL
-
-echo "Waiting for 30 seconds..."
-sleep 30
-
-chmod 600 db_password.txt || { echo "Failed to change permission of db_password.txt"; exit 1; }
-
-echo "Setup completed successfully"
