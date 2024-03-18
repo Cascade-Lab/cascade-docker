@@ -31,10 +31,10 @@ chmod +x support/docker-install-ubuntu.sh
 ## Log into the Cascade Container Registry
 
 ```shell
-docker login -u USER -p PASSWORD cascadelab.azurecr.io
+docker login -u User -p Docker-Password cascadelab.azurecr.io
 ```
 
-Note: USER and PASSWORD are provided by Cascade client care.
+Note: Docker-User and Docker-Password are provided by Cascade client care.
 
 https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
@@ -42,18 +42,9 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 
 Open the 'db_password.txt' file and update the password to your desired one
 
-## Secure Password
-
-Make sure you are in the cascade-docker folder.
-
-```shell
-chmod 600 db_password.txt
-```
-After running this command, the file will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
-
 ## Creating Database and Attachment Folders
 
-Step 1: Create Necessary Folders for the data at your desired location 
+Step 1: Create Necessary Folders for the data at your desired location .
 
 Go to the desired location and execute the following command in your terminal: 
 
@@ -64,7 +55,6 @@ After running this command:
 
 The data/db and data/documents directories will be created within your desired location. 
 
- 
 
 Step 2: Update Docker Compose Configuration 
 
@@ -76,12 +66,12 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/<USER>/cascade-docker/data/db
+      device: /<pathToDataDirectory>/data/db
   app-data:
     driver_opts:
       type: none
       o: bind
-      device: /home/<USER>/cascade-docker/data/documents
+      device: /<pathToDataDirectory>/data/documents
 ```
 
 ## Start Cascade
@@ -124,16 +114,22 @@ And check if the Screening API field is working:
 
 ![image](https://github.com/Cascade-Lab/cascade-docker/assets/146708464/6e9018c2-3870-4ce8-8959-976237288aa8)
 
+## Secure Password
+
+Make sure you are in the cascade-docker folder.
+
+```shell
+chmod 600 db_password.txt
+```
+After running this command, the file will have permissions set to 600, granting read and write access only to the file owner while denying access to other users.
 
 ## Stop Cascade
  
 It is possible to stop Cascade, first make sure you are in the cascade-docker folder, then execute the following command line. 
 ```
-docker compose down
+docker compose stop
 ```
 
 ## Backup Cascade
 
-The **data** folder is what you need to backup
-
-it is located in cascade-docker directory
+The **data** folder is what you need to backup.
