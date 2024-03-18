@@ -1,3 +1,5 @@
+version: '4.3'
+
 services:
   db:
     restart: always
@@ -8,16 +10,14 @@ services:
       POSTGRES_DB: postgres
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./0-init.sql:/docker-entrypoint-initdb.d/0-init.sql
-      - ./1-init-cascade.sql:/docker-entrypoint-initdb.d/1-init-cascade.sql
+      - ./0-init-database.sh:/docker-entrypoint-initdb.d/0-init-database.sh
     ports:
       - 5432:5432
     secrets:
       - db_password
-
   app:
     restart: always
-    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v4.2.1
+    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v4.3.0
     depends_on:
       - db
     environment:
@@ -40,9 +40,9 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/<USER>/cascade-docker/data/db
+      device: /home/azureuser/cascade-docker/data/db
   app-data:
     driver_opts:
       type: none
       o: bind
-      device: /home/<USER>/cascade-docker/data/documents
+      device: /home/azureuser/cascade-docker/data/documents
