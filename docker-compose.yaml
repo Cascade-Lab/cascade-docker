@@ -15,7 +15,6 @@ services:
       - 5432:5432
     secrets:
       - db_password
-    command: bash -c "chmod +x /docker-entrypoint-initdb.d/0-init-database.sh"
 
   app:
     restart: always
