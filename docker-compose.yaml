@@ -10,7 +10,7 @@ services:
       POSTGRES_DB: postgres
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./init-database.sh:/docker-entrypoint-initdb.d/0-init-database.sh
+      - ./0-init-database.sh:/docker-entrypoint-initdb.d/0-init-database.sh
     ports:
       - 5432:5432
     secrets:
