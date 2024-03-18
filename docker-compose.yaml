@@ -9,6 +9,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
       POSTGRES_DB: postgres
+      CURRENT_UID: "${CURRENT_UID:-$(id -u)}"
+      CURRENT_GID: "${CURRENT_GID:-$(id -g)}"
     volumes:
       - db-data:/var/lib/postgresql/data
       - ./0-init-database.sh:/docker-entrypoint-initdb.d/0-init-database.sh
