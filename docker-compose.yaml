@@ -7,6 +7,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-$(cat /run/secrets/db_password)}"
       POSTGRES_DB: postgres
     volumes:
       - db-data:/var/lib/postgresql/data
@@ -41,9 +42,9 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/<USER>/cascade-docker/data/db
+      device: /home/azureuser/cascade-docker/data/db
   app-data:
     driver_opts:
       type: none
       o: bind
-      device: /home/<USER>/cascade-docker/data/documents
+      device: /home/azureuser/cascade-docker/data/documents
