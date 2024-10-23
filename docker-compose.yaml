@@ -17,7 +17,7 @@ services:
       - db_password
   app:
     restart: always
-    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v4.3.0
+    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v5.1.0
     depends_on:
       - db
     environment:
