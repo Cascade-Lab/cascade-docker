@@ -138,7 +138,7 @@ The **data** folder is what you need to backup.
 
 To update Cascade using Docker, you'll need to utilize the latest image released by Cascade. For example: 
 ```
-cascadelab.azurecr.io/cascade-lab/cascade/prod:v4.5.0
+cascadelab.azurecr.io/cascade-lab/cascade/prod:v5.2.0
 ```
 The latest Docker image is provided by Cascade Client Care. Once you have the Docker image, replace the old image with the new one provided in the docker-compose.yaml file.  
 ```
