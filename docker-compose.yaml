@@ -1,4 +1,4 @@
-version: '4.3'
+version: '5.7'
 
 services:
   db:
@@ -17,7 +17,7 @@ services:
       - db_password
   app:
     restart: always
-    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v5.2.0
+    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v5.7.0
     depends_on:
       - db
     environment:
