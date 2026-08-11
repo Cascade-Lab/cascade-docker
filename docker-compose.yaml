@@ -3,7 +3,7 @@ version: '5.7'
 services:
   db:
     restart: always
-    image: postgres:15
+    image: postgres:16
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
@@ -17,7 +17,7 @@ services:
       - db_password
   app:
     restart: always
-    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v5.22.0
+    image: cascadelab.azurecr.io/cascade-lab/cascade/prod:v5.54.0
     depends_on:
       - db
     environment:
